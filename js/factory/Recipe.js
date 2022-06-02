@@ -1,6 +1,6 @@
 import { recipes } from "../data/recipes.js";
 
-export class RecipeDisplay {
+export class Recipe {
   constructor(data) {
     this.id = data.id;
     this.appliance = data.appliance;

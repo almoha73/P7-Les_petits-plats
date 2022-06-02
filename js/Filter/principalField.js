@@ -15,21 +15,28 @@ export function filterField(){
     //console.log(formControl);
 
     formControl.addEventListener('input', (e) => {
+
+        /// tri a partir des cartes affichees
         const filterValue = e.target.value.toLowerCase();
             for(let i = 0; i < recipeCards.length; i++){
                 if(filterValue.length > 2){
                 
                     if(!recipeCards[i].textContent.toLowerCase().includes(filterValue)){
                         
-                        recipeCards[i].remove()   
+                        recipeCards[i].remove()
+                        recipeCards.pop(recipeCards[i])   
                     }
                     
                 }else{
                     container.append(recipeCards[i])
                 }
             
-            }
+        }
 
+        console.log(recipeCards);
+
+
+        // essai de tri dans la console à partir de l'objet recipe et de la valeur tapée dans l'input    
             let recipeArray = []
             
             recipeArray.push(recipes.filter(recipe => recipe.name.includes(filterValue)))
@@ -51,7 +58,6 @@ export function filterField(){
                 }
                 return array;
             }
-            
             concat(recipeArray)
             
             console.log(recipeArray);
