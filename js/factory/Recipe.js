@@ -9,7 +9,6 @@ export class RecipeDisplay {
     this.time = data.time;
     this.description = data.description;
     this.ingredients = data.ingredients;
-    //console.log(this.ingredients);
     this.quantity = data.quantity;
     this.unit = data.unit;
     this.newIngredient = [];
@@ -65,7 +64,4 @@ export class RecipeDisplay {
   }
 }
 
-recipes.forEach((recipe) => {
-  const recipeDisplay = new RecipeDisplay(recipe);
-  recipeDisplay.buildCard();
-});
+
