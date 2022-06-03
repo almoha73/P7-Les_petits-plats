@@ -53,24 +53,24 @@ const container = document.querySelector('.fluid-grid')
     let recipeName;
     let recipeDescription;
     let recipeIngredients
-    const filterValue = e.target.value.toLowerCase();    
+    const filterValue = e.target.value.trim().toLowerCase();
+    
+    recipeName = recipes.filter(recipe => recipe.name.toLowerCase().includes(filterValue))
+    console.log(recipeName)
 
-        recipeName = recipes.filter(recipe => recipe.name.includes(filterValue))
-            console.log(recipeName)
+    recipeDescription = recipes.filter(recipe => recipe.description.toLowerCase().includes(filterValue))
+    console.log(recipeDescription)
 
-            recipeDescription = recipes.filter(recipe => recipe.description.includes(filterValue.toLowerCase()))
-            console.log(recipeDescription)
-
-            recipeIngredients = recipes.filter(recipe => recipe.ingredients.find(({ingredient}) =>  ingredient.toLowerCase().includes(filterValue)))
-            console.log(recipeIngredients);
+    recipeIngredients = recipes.filter(recipe => recipe.ingredients.find(({ingredient}) =>  ingredient.toLowerCase().includes(filterValue)))
+    console.log(recipeIngredients);
+    
+    const recipeConcat = recipeName.concat(recipeDescription, recipeIngredients)
+    
+    console.log(recipeConcat);
+        if(filterValue.length > 2){
             
-            const recipeConcat = recipeName.concat(recipeDescription, recipeIngredients)
-            
-            console.log(recipeConcat);
 
            /// fonction remove duplicate objets dans un array
-
-   
             const seen = new Set
             const filteredArr = recipeConcat.filter(el => {
                 const duplicate = seen.has(el.id);
@@ -83,11 +83,13 @@ const container = document.querySelector('.fluid-grid')
             console.log(filteredArr);
 
             container.innerHTML = ''
-            filteredArr.forEach((recipe) => {
-                
+
+            filteredArr.forEach((recipe) => {    
                 const recipeDisplay = new Recipe(recipe);
                 recipeDisplay.buildCard();
             });
+        }
+        
             
     })
     
