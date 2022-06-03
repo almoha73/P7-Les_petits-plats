@@ -1,6 +1,6 @@
 import {recipes} from '../data/recipes.js'
 import {Recipe} from '../factory/Recipe.js'
-
+import {ButtonMenuFactory} from '../factory/ButtonFactory.js'
 console.log(recipes);
 
 // FONCTION FILTRATION DES CARTES EN FONCTION INGREDIENTS/NOM/DESCRIPTION
@@ -40,14 +40,16 @@ console.log(recipes);
 
 
 // essai de tri dans la console à partir de l'objet recipe et de la valeur tapée dans l'input  
-let filteredArr;
-const recipeCards = Array.from(document.querySelectorAll('.card'))
-//     //console.log(recipeCards);
+
+
 export function filterField(){
     const formControl = document.querySelector('.form-control')
     const recipeCards = Array.from(document.querySelectorAll('.card'))
 //     //console.log(recipeCards);
 const container = document.querySelector('.fluid-grid')
+const buttonUstensilsList = document.querySelector(
+    ".dropdown-menu__ustensils"
+  );
 //     //console.log(container);
     formControl.addEventListener('input', (e) => {
     let recipeName;
@@ -68,8 +70,7 @@ const container = document.querySelector('.fluid-grid')
     
     console.log(recipeConcat);
         if(filterValue.length > 2){
-            
-
+    
            /// fonction remove duplicate objets dans un array
             const seen = new Set
             const filteredArr = recipeConcat.filter(el => {
@@ -82,22 +83,30 @@ const container = document.querySelector('.fluid-grid')
             
             console.log(filteredArr);
 
+            //On vide le container des cartes
             container.innerHTML = ''
 
+            //On affiche les nouvelles données triées
             filteredArr.forEach((recipe) => {    
                 const recipeDisplay = new Recipe(recipe);
                 recipeDisplay.buildCard();
+                
             });
+            buttonUstensilsList.innerHTML=''
+            const buttonMenuFactory = new ButtonMenuFactory()
+                buttonMenuFactory.workArrayForButton(filteredArr)
         }
         
+
             
     })
-    
-
-    
-
 }
 
-    
 
+// Fonction générale pour enlever le doublons d'un array
+
+function duplicateRemove(array, newArray){
+    newArray = [...new Set(array)];
+    
+}
     

@@ -57,7 +57,7 @@ export class Recipe {
         );
       } else {
         this.newIngredient.push(
-          `<p>${this.ingredients[i].ingredient}: ${this.ingredients[i].quantity}${this.ingredients[i].unit}</p>`
+          `<p>${this.ingredients[i].ingredient}: ${this.ingredients[i].quantity} ${this.ingredients[i].unit}</p>`
         );
       }
     }

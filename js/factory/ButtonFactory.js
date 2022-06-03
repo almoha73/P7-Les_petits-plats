@@ -6,8 +6,7 @@ export class ButtonMenuFactory {
     this.ingredients = new Set();
     this.appliance = new Set();
     this.ustensils = new Set();
-    this.workArrayForButton();
-    this.buildButton();
+    //this.buildButton();
   }
 
   buildButton() {
@@ -46,8 +45,8 @@ export class ButtonMenuFactory {
     });
   }
 
-  workArrayForButton() {
-    recipes.forEach((recipe) => {
+  workArrayForButton(array) {
+    array.forEach((recipe) => {
       this.appliance.add(recipe.appliance);
       recipe.ingredients.forEach((i) => {
         this.ingredients.add(i.ingredient);
@@ -56,7 +55,9 @@ export class ButtonMenuFactory {
         this.ustensils.add(i);
       });
     });
+    this.buildButton()
   }
+  
 }
 
 
