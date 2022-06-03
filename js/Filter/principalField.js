@@ -39,71 +39,78 @@ console.log(recipes);
 // }
 
 
-// essai de tri dans la console à partir de l'objet recipe et de la valeur tapée dans l'input  
 
+
+// essai de tri dans la console à partir de l'objet recipe et de la valeur tapée dans l'input  
 
 export function filterField(){
     const formControl = document.querySelector('.form-control')
     const recipeCards = Array.from(document.querySelectorAll('.card'))
-//     //console.log(recipeCards);
+    //console.log(recipeCards);
 const container = document.querySelector('.fluid-grid')
 const buttonUstensilsList = document.querySelector(
     ".dropdown-menu__ustensils"
   );
+  const buttonIngredientsList = document.querySelector(
+    ".dropdown-menu__ingredients"
+  );
+  const buttonApplianceList = document.querySelector(
+    ".dropdown-menu__appliances"
+  );
 //     //console.log(container);
     formControl.addEventListener('input', (e) => {
-    let recipeName;
-    let recipeDescription;
-    let recipeIngredients
+   
     const filterValue = e.target.value.trim().toLowerCase();
-    //création nouveau tableau d'objets filtré par nom en fonction de la valeur de l'input
-    recipeName = recipes.filter(recipe => recipe.name.toLowerCase().includes(filterValue))
-    console.log(recipeName)
-    
-    //création nouveau tableau d'objets filtré par description en fonction de la valeur de l'input
-    recipeDescription = recipes.filter(recipe => recipe.description.toLowerCase().includes(filterValue))
-    console.log(recipeDescription)
+   
+    //création nouveau tableau d'objets filtré par nom ou par description ou par ingrédient en fonction de la valeur de l'input
 
-    //création nouveau tableau d'objets filtré par ingreédient en fonction de la valeur de l'input
-    recipeIngredients = recipes.filter(recipe => recipe.ingredients.find(({ingredient}) =>  ingredient.toLowerCase().includes(filterValue)))
-    console.log(recipeIngredients);
-    
-    //concaténation des trois tableaux précédents
-    const recipeConcat = recipeName.concat(recipeDescription, recipeIngredients)
-    console.log(recipeConcat);
+    const recipeConcat = recipes.filter(recipe => (recipe.name.toLowerCase().includes(filterValue))|| (recipe.description.toLowerCase().includes(filterValue)) || filterInIngredients(recipe, filterValue))
+    console.log(recipeConcat)
 
         if(filterValue.length > 2){
-    
-           /// fonction remove duplicate objets dans un array
-            const seen = new Set
-            const filteredArr = recipeConcat.filter(el => {
-                const duplicate = seen.has(el.id);
-                seen.add(el.id);
-               
-                return !duplicate;
-                
-            })
             
-            console.log(filteredArr);// nouveau tableau d'objet trié et sans doublons
+            console.log(recipeConcat);// nouveau tableau d'objet trié et sans doublons
 
             //On vide le container des cartes
             container.innerHTML = ''
 
             //On affiche les nouvelles cartes en fonction du nouveau tableau généré par le tri
-            filteredArr.forEach((recipe) => {    
+            recipeConcat.forEach((recipe) => {    
                 const recipeDisplay = new Recipe(recipe);
                 recipeDisplay.buildCard();
                 
             });
             //On affiche les tris dans les boutons en fonction du nouveau tableau généré par le tri
-            buttonUstensilsList.innerHTML=''
+            buttonUstensilsList.innerHTML='';
+            buttonIngredientsList.innerHTML=''
+            buttonApplianceList.innerHTML=''
             const buttonMenuFactory = new ButtonMenuFactory()
-                buttonMenuFactory.workArrayForButton(filteredArr)
-        }
+                buttonMenuFactory.workArrayForButton(recipeConcat)
+            }else{
+                container.innerHTML = ''
+                buttonUstensilsList.innerHTML='';
+            buttonIngredientsList.innerHTML=''
+            buttonApplianceList.innerHTML=''
+                recipeConcat.forEach((recipe) => {    
+                    const recipeDisplay = new Recipe(recipe);
+                    recipeDisplay.buildCard();
+                    
+                });
+                const buttonMenuFactory = new ButtonMenuFactory()
+                buttonMenuFactory.workArrayForButton(recipes)
+            }
+            // const buttonMenuFactory = new ButtonMenuFactory()
+            // buttonMenuFactory.workArrayForButton(recipes)
+        })
         
 
             
-    })
+    }
+
+
+function filterInIngredients(r, filterValue){
+    const n = (r.ingredients.find(({ingredient}) =>  ingredient.toLowerCase().includes(filterValue)))
+    if(n){return true}else return false;
 }
 
 
