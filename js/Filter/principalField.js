@@ -1,71 +1,101 @@
 import {recipes} from '../data/recipes.js'
+import {Recipe} from '../factory/Recipe.js'
 
 console.log(recipes);
 
 // FONCTION FILTRATION DES CARTES EN FONCTION INGREDIENTS/NOM/DESCRIPTION
 
-export function filterField(){
-    // Filtre et affichage des cartes champ principal pour lettres > 2 / reset inférieur à 2
+// export function filterField(){
+//     // Filtre et affichage des cartes champ principal pour lettres > 2 / reset inférieur à 2
     
-    const container = document.querySelector('.fluid-grid')
-    //console.log(container);
-    const recipeCards = Array.from(document.querySelectorAll('.card'))
-    //console.log(recipeCards);
-    const formControl = document.querySelector('.form-control')
-    //console.log(formControl);
-    const recipeCardsCopy = recipeCards.slice()
+//     const container = document.querySelector('.fluid-grid')
+//     //console.log(container);
+//     const recipeCards = Array.from(document.querySelectorAll('.card'))
+//     //console.log(recipeCards);
+//     const formControl = document.querySelector('.form-control')
+//     //console.log(formControl);
+//     const recipeCardsCopy = recipeCards.slice()
 
-    formControl.addEventListener('input', (e) => {
-        /// tri a partir des cartes affichees
-        const filterValue = e.target.value.toLowerCase();
-            for(let i = 0; i < recipeCardsCopy.length; i++){
-                if(filterValue.length > 2){
+//     formControl.addEventListener('input', (e) => {
+//         /// tri a partir des cartes affichees
+//         const filterValue = e.target.value.toLowerCase();
+//             for(let i = 0; i < recipeCardsCopy.length; i++){
+//                 if(filterValue.length > 2){
                 
-                    if(!recipeCardsCopy[i].textContent.toLowerCase().includes(filterValue)){  
-                        recipeCardsCopy[i].remove()
-                        recipeCards.pop(recipeCardsCopy[i])   
-                    }
+//                     if(!recipeCardsCopy[i].textContent.toLowerCase().includes(filterValue)){  
+//                         recipeCardsCopy[i].remove()
+//                         recipeCards.pop(recipeCardsCopy[i])   
+//                     }
                     
-                }else{
-                    container.append(recipeCardsCopy[i])
-                }
+//                 }else{
+//                     container.append(recipeCardsCopy[i])
+//                 }
             
-            }
+//             }
 
-        console.log(recipeCards);
+//         //console.log(recipeCards);              
+//     })
+    
+// }
 
 
-        // essai de tri dans la console à partir de l'objet recipe et de la valeur tapée dans l'input    
-            let recipeArray = []
+// essai de tri dans la console à partir de l'objet recipe et de la valeur tapée dans l'input  
+let filteredArr;
+const recipeCards = Array.from(document.querySelectorAll('.card'))
+//     //console.log(recipeCards);
+export function filterField(){
+    const formControl = document.querySelector('.form-control')
+    const recipeCards = Array.from(document.querySelectorAll('.card'))
+//     //console.log(recipeCards);
+const container = document.querySelector('.fluid-grid')
+//     //console.log(container);
+    formControl.addEventListener('input', (e) => {
+    let recipeName;
+    let recipeDescription;
+    let recipeIngredients
+    const filterValue = e.target.value.toLowerCase();    
+
+        recipeName = recipes.filter(recipe => recipe.name.includes(filterValue))
+            console.log(recipeName)
+
+            recipeDescription = recipes.filter(recipe => recipe.description.includes(filterValue.toLowerCase()))
+            console.log(recipeDescription)
+
+            recipeIngredients = recipes.filter(recipe => recipe.ingredients.find(({ingredient}) =>  ingredient.toLowerCase().includes(filterValue)))
+            console.log(recipeIngredients);
             
-            recipeArray.push(recipes.filter(recipe => recipe.name.includes(filterValue)))
-            console.log(recipes.filter(recipe => recipe.name.includes(filterValue.toLowerCase())))
-
-            recipeArray.push(recipes.filter(recipe => recipe.description.includes(filterValue.toLowerCase())))
-            console.log(recipes.filter(recipe => recipe.description.includes(filterValue.toLowerCase())))
-
-            recipeArray.push(recipes.filter(recipe => recipe.ingredients.find(({ingredient}) =>  ingredient.includes(filterValue.toLowerCase()))))
-            console.log(recipes.filter(recipe => recipe.ingredients.find(({ingredient}) =>  ingredient.toLowerCase().includes(filterValue.toLowerCase()))))
-
+            const recipeConcat = recipeName.concat(recipeDescription, recipeIngredients)
             
-            console.log(recipeArray);
+            console.log(recipeConcat);
 
-            function concat(array){
-                for(let i = 0; i< array.length; i++){
-                    array[i].concat(array[i++])
-                    console.log(array);
-                }
-                return array;
-            }
-            concat(recipeArray)
-            
-            console.log(recipeArray);
+           /// fonction remove duplicate objets dans un array
 
-            const newRecipeArray = new Set(recipeArray)
-            console.log(newRecipeArray);
+   
+            const seen = new Set
+            const filteredArr = recipeConcat.filter(el => {
+                const duplicate = seen.has(el.id);
+                seen.add(el.id);
+               
+                return !duplicate;
+                
+            })
             
-        
+            console.log(filteredArr);
+
+            container.innerHTML = ''
+            filteredArr.forEach((recipe) => {
+                
+                const recipeDisplay = new Recipe(recipe);
+                recipeDisplay.buildCard();
+            });
+            
     })
     
+
+    
+
 }
 
+    
+
+    
