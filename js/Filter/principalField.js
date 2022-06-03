@@ -13,25 +13,24 @@ export function filterField(){
     //console.log(recipeCards);
     const formControl = document.querySelector('.form-control')
     //console.log(formControl);
+    const recipeCardsCopy = recipeCards.slice()
 
     formControl.addEventListener('input', (e) => {
-
         /// tri a partir des cartes affichees
         const filterValue = e.target.value.toLowerCase();
-            for(let i = 0; i < recipeCards.length; i++){
+            for(let i = 0; i < recipeCardsCopy.length; i++){
                 if(filterValue.length > 2){
                 
-                    if(!recipeCards[i].textContent.toLowerCase().includes(filterValue)){
-                        
-                        recipeCards[i].remove()
-                        recipeCards.pop(recipeCards[i])   
+                    if(!recipeCardsCopy[i].textContent.toLowerCase().includes(filterValue)){  
+                        recipeCardsCopy[i].remove()
+                        recipeCards.pop(recipeCardsCopy[i])   
                     }
                     
                 }else{
-                    container.append(recipeCards[i])
+                    container.append(recipeCardsCopy[i])
                 }
             
-        }
+            }
 
         console.log(recipeCards);
 

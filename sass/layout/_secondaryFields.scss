@@ -45,21 +45,21 @@
   }
   
   .dropdown-ingredients,
-  .dropdown-ingredients .dropdown-menu__ingredients {
+  .dropdown-menu__ingredients {
     background-color: abstracts.$color-ingredient;
   }
   
   .dropdown-appliances,
-  .dropdown-appliances .dropdown-menu__appliances {
+  .dropdown-menu__appliances {
     background-color: abstracts.$color-appliance;
   }
   
   .dropdown-ustensils,
-  .dropdown-ustensils .dropdown-menu__ustensils {
+  .dropdown-menu__ustensils {
     background-color: abstracts.$color-ustensil;
   }
   
-  .dropdown-menu {
+  .dropdown-menu__ingredients, .dropdown-menu__appliances, .dropdown-menu__ustensils {
     position: absolute;
     top: calc(100% - 5px);
     display: grid;
@@ -91,7 +91,9 @@
     background-image: url("../images/arrow-up.svg");
   }
   
-  .dropdown.active > .form-control + .dropdown-menu {
+  .dropdown.active > .form-control + .dropdown-menu__ustensils,
+  .dropdown.active > .form-control + .dropdown-menu__appliances,
+  .dropdown.active > .form-control + .dropdown-menu__ingredients {  
     pointer-events: auto;
     transform: scaleY(1);
   

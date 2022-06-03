@@ -18,7 +18,7 @@ export class ButtonMenuFactory {
     const listIngredients = Array.from(this.ingredients).sort();
     console.log(listIngredients);
     listIngredients.forEach((e) => {
-      const elt = `<li class="dropdown-menu__item data-filter="ingredients">${e}</li>`;
+      const elt = `<li class="dropdown-menu__item" data-filter="ingredients">${e}</li>`;
       buttonIngredientsList.innerHTML += elt;
     });
 
@@ -29,11 +29,10 @@ export class ButtonMenuFactory {
     const listAppliance = Array.from(this.appliance).sort();
     console.log(listAppliance);
     listAppliance.forEach((e) => {
-      const elt = `<li class="dropdown-menu__item data-filter="appliances">${e}</li>`;
+      const elt = `<li class="dropdown-menu__item" data-filter="appliances">${e}</li>`;
       buttonApplianceList.innerHTML += elt;
     });
 
-    //buttonApplianceList.innerHTML = `${this.applianceArray.sort().join("")}`;
 
     const buttonUstensilsList = document.querySelector(
       ".dropdown-menu__ustensils"
@@ -42,7 +41,7 @@ export class ButtonMenuFactory {
     const listUstensils = Array.from(this.ustensils).sort();
     console.log(listUstensils);
     listUstensils.forEach((e) => {
-      const elt = `<li class="dropdown-menu__item data-filter="ustensils">${e}</li>`;
+      const elt = `<li class="dropdown-menu__item" data-filter="ustensils">${e}</li>`;
       buttonUstensilsList.innerHTML += elt;
     });
   }

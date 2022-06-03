@@ -1,5 +1,5 @@
 const changePlaceholder = (dropdown) => {
-    const input = dropdown.querySelector("input");
+    const input = dropdown.querySelector("input.form-control-secondary");
     const { placeholder } = input;
     input.placeholder = input.dataset.message;
     input.dataset.message = placeholder;
@@ -7,7 +7,7 @@ const changePlaceholder = (dropdown) => {
   
   document.addEventListener("click", (e) => {
     const dropdownButton = e.target.matches("[data-dropdown-button]");
-    if (!dropdownButton && e.target.closest("[data-dropdown]") != null) return;
+    if (!dropdownButton && e.target.closest("[data-dropdown]") !== null) return;
   
     let currentDropdown;
   
