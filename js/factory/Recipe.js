@@ -1,4 +1,5 @@
 import { recipes } from "../data/recipes.js";
+import { variables } from "../utils/variables.js";
 
 export class Recipe {
   constructor(data) {
@@ -15,8 +16,8 @@ export class Recipe {
     this.undefinedManage();
   }
   buildCard() {
-    const container = document.querySelector(".container.fluid-grid");
-    container.innerHTML += `
+    
+    variables.container.innerHTML += `
         <div id="${this.id}" data-appliance="${
       this.appliance
     }" data-ustensiles="${this.ustensiles}" class="card">

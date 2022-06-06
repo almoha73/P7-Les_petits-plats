@@ -2,6 +2,8 @@ import {recipes} from '../data/recipes.js'
 import {Recipe} from '../factory/Recipe.js'
 import {ButtonMenuFactory} from '../factory/ButtonFactory.js'
 console.log(recipes);
+import { variables } from '../utils/variables.js';
+import { globalFunctions } from '../utils/globalFunctions.js';
 
 // FONCTION FILTRATION DES CARTES EN FONCTION INGREDIENTS/NOM/DESCRIPTION
 
@@ -44,21 +46,7 @@ console.log(recipes);
 // essai de tri dans la console à partir de l'objet recipe et de la valeur tapée dans l'input  
 
 export function filterField(){
-    const formControl = document.querySelector('.form-control')
-    const recipeCards = Array.from(document.querySelectorAll('.card'))
-    //console.log(recipeCards);
-const container = document.querySelector('.fluid-grid')
-const buttonUstensilsList = document.querySelector(
-    ".dropdown-menu__ustensils"
-  );
-  const buttonIngredientsList = document.querySelector(
-    ".dropdown-menu__ingredients"
-  );
-  const buttonApplianceList = document.querySelector(
-    ".dropdown-menu__appliances"
-  );
-//     //console.log(container);
-    formControl.addEventListener('input', (e) => {
+    variables.formControl.addEventListener('input', (e) => {
    
     const filterValue = e.target.value.trim().toLowerCase();
    
@@ -68,43 +56,22 @@ const buttonUstensilsList = document.querySelector(
     console.log(recipeConcat)
 
         if(filterValue.length > 2){
-            
-            console.log(recipeConcat);// nouveau tableau d'objet trié et sans doublons
 
             //On vide le container des cartes
-            container.innerHTML = ''
+            variables.container.innerHTML = ''
 
             //On affiche les nouvelles cartes en fonction du nouveau tableau généré par le tri
-            recipeConcat.forEach((recipe) => {    
-                const recipeDisplay = new Recipe(recipe);
-                recipeDisplay.buildCard();
-                
-            });
+            globalFunctions.recipesPreview(recipeConcat)
             //On affiche les tris dans les boutons en fonction du nouveau tableau généré par le tri
-            buttonUstensilsList.innerHTML='';
-            buttonIngredientsList.innerHTML=''
-            buttonApplianceList.innerHTML=''
-            const buttonMenuFactory = new ButtonMenuFactory()
-                buttonMenuFactory.workArrayForButton(recipeConcat)
+            globalFunctions.buttonReset()
+            globalFunctions.buttonListPreview(recipeConcat)
             }else{
-                container.innerHTML = ''
-                buttonUstensilsList.innerHTML='';
-            buttonIngredientsList.innerHTML=''
-            buttonApplianceList.innerHTML=''
-                recipeConcat.forEach((recipe) => {    
-                    const recipeDisplay = new Recipe(recipe);
-                    recipeDisplay.buildCard();
-                    
-                });
-                const buttonMenuFactory = new ButtonMenuFactory()
-                buttonMenuFactory.workArrayForButton(recipes)
+                variables.container.innerHTML = ''
+                globalFunctions.buttonReset()
+                globalFunctions.recipesPreview(recipeConcat)
+                globalFunctions.buttonListPreview(recipes)
             }
-            // const buttonMenuFactory = new ButtonMenuFactory()
-            // buttonMenuFactory.workArrayForButton(recipes)
-        })
-        
-
-            
+        })        
     }
 
 
@@ -114,10 +81,5 @@ function filterInIngredients(r, filterValue){
 }
 
 
-// Fonction générale pour enlever le doublons d'un array
 
-function duplicateRemove(array, newArray){
-    newArray = [...new Set(array)];
-    
-}
     
