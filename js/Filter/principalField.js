@@ -17,81 +17,73 @@ export function filterPrincipalField() {
 
     if (filterValue.length > 2) {
       //On vide le container des cartes
-      variables.container.innerHTML = "";
-
       //On affiche les nouvelles cartes en fonction du nouveau tableau généré par le tri
-      globalFunctions.recipesPreview(newArray);
       //On affiche les tris dans les boutons en fonction du nouveau tableau généré par le tri
-      
-      globalFunctions.buttonReset();
-      globalFunctions.buttonListPreview(newArray);
-      const cards = Array.from(document.querySelectorAll('.card'))
-      console.log(cards);
-
+      globalFunctions.display(newArray)
+     
     } else {
        //sinon on affiche les 50 cartes 
-      variables.container.innerHTML = "";
-      globalFunctions.buttonReset();
-      globalFunctions.recipesPreview(newArray);
-      globalFunctions.buttonListPreview(recipes);
+       globalFunctions.display(recipes)
     }
-
     console.log(newArray);
-    
+    filterSecondaryField(newArray)
+  })
 
-    function secondField(){
-      
-      variables.inputIngredient.addEventListener("input", (e) => {
-        let filterValue2 = e.target.value.trim().toLowerCase();
-        const ingredientArray = newArray.filter(recipe => globalFunctions.filterIngredients(recipe, filterValue2));
-        console.log(ingredientArray);
-        variables.container.innerHTML = "";
-        globalFunctions.display(ingredientArray)
-        globalFunctions.buttonReset()
-        globalFunctions.buttonIngredientListPreview(ingredientArray, filterValue2)        
-        const cards = Array.from(document.querySelectorAll('.card'))
-      console.log(cards);
-      const liste = Array.from(
-        document.querySelectorAll(
-          ".dropdown-menu__ingredients .dropdown-menu__item"
-        )
-      )
-      console.log(liste);  
+  
+}  
+filterSecondaryField(recipes)
+  //   function secondField(){
+  //        variables.inputIngredient.addEventListener("input", (e) => {
+  //       let filterValue2 = e.target.value.trim().toLowerCase();
+  //       const ingredientArray = newArray.filter(recipe => globalFunctions.filterIngredients(recipe, filterValue2));
+  //       console.log(ingredientArray);
+  //       variables.container.innerHTML = "";
+  //       globalFunctions.display(ingredientArray)
+  //       globalFunctions.buttonReset()
+  //       globalFunctions.buttonIngredientListPreview(ingredientArray, filterValue2)        
+  //       const cards = Array.from(document.querySelectorAll('.card'))
+  //       console.log(cards);
+  //       const liste = Array.from(
+  //       document.querySelectorAll(
+  //         ".dropdown-menu__ingredients .dropdown-menu__item"
+  //       )
+  //     )
+  //     console.log(liste);  
       
       
 
-      if(document.querySelector(".form-control-primary").value === null){
+  //     if(document.querySelector(".form-control-primary").value.trim() === ''){
         
-        filterSecondaryField()
-      } else{
-        liste.forEach(elt => {
-          elt.addEventListener('click', (e) => {
-            console.log(e.target.innerHTML)
-            let filterValue3 = e.target.innerHTML
-            console.log(filterValue3);
-            document.querySelector(".form-control-ingredient").value = filterValue3
-            console.log(ingredientArray);
-            const ingredientArray2 = ingredientArray.filter(recipe => globalFunctions.filterIngredients(recipe, filterValue3.toLowerCase()));
+  //       filterSecondaryField()
+  //     } else{
+  //       liste.forEach(elt => {
+  //         elt.addEventListener('click', (e) => {
+  //           console.log(e.target.innerHTML)
+  //           let filterValue3 = e.target.innerHTML
+  //           console.log(filterValue3);
+  //           document.querySelector(".form-control-ingredient").value = filterValue3
+  //           console.log(ingredientArray);
+  //           const ingredientArray2 = ingredientArray.filter(recipe => globalFunctions.filterIngredients(recipe, filterValue3.toLowerCase()));
   
-            console.log(ingredientArray2);
-            globalFunctions.display(ingredientArray2)
-          })
+  //           console.log(ingredientArray2);
+  //           globalFunctions.display(ingredientArray2)
+  //         })
   
   
           
           
-        })
-      }
+  //       })
+  //     }
           
-    })
+  //   })
 
       
        
-    }
-    secondField()
+  //   }
+  //   secondField()
    
-  })
-}
+  // })
+
     
  
 
