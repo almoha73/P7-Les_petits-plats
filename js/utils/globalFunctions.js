@@ -35,7 +35,7 @@ export const globalFunctions = {
     variables.buttonApplianceList.innerHTML = "";
   },
 
-  // Fonction générale pour enlever le doublons d'un array d'objets
+  // Fonction générale pour enlever les doublons d'un array d'objets
   duplicateRemove(array) {
     let newArray = [...new Set(array)];
     return newArray
