@@ -8,7 +8,15 @@ export class ButtonMenuFactory {
     //console.log(this.ingredients);
     this.appliance = new Set();
     this.ustensils = new Set();
-   
+    
+  }
+
+  buildArrayButton(){
+    const listIngredients = Array.from(this.ingredients).sort();
+    const listAppliance = Array.from(this.appliance).sort();
+    const listUstensils = Array.from(this.ustensils).sort();
+
+    return [listIngredients, listAppliance, listUstensils]
   }
 
   buildButton() {

@@ -13,6 +13,7 @@
   
   .nav-primary {
     margin-bottom: 1.25rem;
+    
   }
   
   .form-control-primary {
@@ -25,7 +26,7 @@
     background-size: 33px 33px;
     color: abstracts.$color-black;
     font-weight: 400;
-  
+    margin-bottom: 10px;
     &::placeholder {
       color: inherit;
       opacity: 25%;

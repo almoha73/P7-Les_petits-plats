@@ -6,7 +6,6 @@
     align-items: flex-start;
     justify-content: flex-start;
     padding: 0;
-    margin-bottom: 0.9375rem;
     gap: 1rem;
     list-style: none;
   }
@@ -25,6 +24,8 @@
     font-size: 0.875rem;
     font-weight: 700;
     line-height: 1.05rem;
+    margin-bottom: 10px;
+    margin-top: 10px;
   }
   
   .filter-list__item-ingredients {

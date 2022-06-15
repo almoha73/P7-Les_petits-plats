@@ -1,7 +1,7 @@
 import {} from "../index.js";
 
 export let  variables = {
-  formControl: document.querySelector(".form-control"),
+  formControl: document.querySelector(".form-control-primary"),
 
   container: document.querySelector(".container.fluid-grid"),
 

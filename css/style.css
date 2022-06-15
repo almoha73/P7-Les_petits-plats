@@ -39,6 +39,7 @@
   background-size: 33px 33px;
   color: #000;
   font-weight: 400;
+  margin-bottom: 10px;
 }
 .form-control-primary::placeholder {
   color: inherit;
@@ -209,7 +210,6 @@
   align-items: flex-start;
   justify-content: flex-start;
   padding: 0;
-  margin-bottom: 0.9375rem;
   gap: 1rem;
   list-style: none;
 }
@@ -228,6 +228,8 @@
   font-size: 0.875rem;
   font-weight: 700;
   line-height: 1.05rem;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .filter-list__item-ingredients {
