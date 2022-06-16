@@ -6,12 +6,12 @@ import { TextCard } from "../factory/text.js";
 
 console.log(recipes);
 let AllIds = [];
-let ingredientsArray = [];
+let ingredientsArray = []
 let appareils = [];
 let ustensiles = [];
 
 // Tableau correspondance des ids des recettes pour chaque ingrédient par ordre alphabétique
-ingredientsArray = makeIngredient(recipes, ingredientsArray);
+ingredientsArray = makeIngredient(recipes);
 console.log(ingredientsArray);
 
 // Tableau correspondance des ids des recettes pour chaque appareil par ordre alphabétique
@@ -70,7 +70,8 @@ function makeAppareil(array, appareils) {
   return appareils;
 }
 
-function makeIngredient(array, ingredientsArray) {
+export function makeIngredient(array) {
+  let ingredientsArray = []
   array.forEach((recipe) => {
     const { id, ingredients } = recipe;
     for (let i of ingredients) {
@@ -84,6 +85,10 @@ function makeIngredient(array, ingredientsArray) {
       }
     }
   });
+
+  function getIngredients(string) {
+    return ingredientsArray.find((e) => e.name === string);
+  }
   return ingredientsArray;
 }
 
@@ -118,8 +123,8 @@ function getUstensils(string) {
   return ustensiles.find((e) => e.name === string);
 }
 
-function getIngredients(string) {
-  return ingredientsArray.find((e) => e.name === string);
-}
+// function getIngredients(string) {
+//   return ingredientsArray.find((e) => e.name === string);
+// }
 
 export { ingredientsArray, appareils, ustensiles, recipeTextArray, AllIds };

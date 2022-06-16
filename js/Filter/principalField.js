@@ -1,11 +1,11 @@
-import { ingredientsArray, ustensiles, appareils, recipeTextArray, AllIds } from "../utils/arrays.js";
+import {recipeTextArray, AllIds } from "../utils/arrays.js";
 import {} from '../index.js'
 import { variables } from "../utils/variables.js";
 import { recipes } from "../data/recipes.js";
 import { globalFunctions } from "../utils/globalFunctions.js";
 import { filterIngredients} from '../Filter/secondaryFields.js'
 
-console.log(ingredientsArray, appareils, ustensiles, recipeTextArray, AllIds);
+console.log(recipeTextArray, AllIds);
 
 export function filterPrincipalField(){
   variables.formControl.addEventListener('input', (e) => {
@@ -43,7 +43,6 @@ export function filterPrincipalField(){
         
   })
 }
-
 
 
 

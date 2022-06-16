@@ -10,12 +10,12 @@ import { globalFunctions } from './utils/globalFunctions.js'
 //import {AllIds} from './utils/arrays.js'
 
 
-
-globalFunctions.display(recipes)
-
-
+//globalFunctions.display(recipes)
 
 filterPrincipalField()
 
-filterIngredients()
+
+
+
+
 
