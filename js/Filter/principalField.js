@@ -5,7 +5,7 @@ import { recipes } from "../data/recipes.js";
 import { globalFunctions } from "../utils/globalFunctions.js";
 import { filterIngredients} from '../Filter/secondaryFields.js'
 
-console.log(ingredientsArray, appareils, ustensiles, recipeTextArray);
+console.log(ingredientsArray, appareils, ustensiles, recipeTextArray, AllIds);
 
 export function filterPrincipalField(){
   variables.formControl.addEventListener('input', (e) => {
