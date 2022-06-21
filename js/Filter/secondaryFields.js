@@ -1,18 +1,17 @@
-import { variables } from '../utils/variables.js'
-import { recipes } from '../data/recipes.js';
-import {} from '../index.js'
-import { Recipe } from '../factory/Recipe.js';
-//import { ingredientsArray, ustensiles, appareils, recipeTextArray, AllIds, makeIngredient} from "../utils/arrays.js";
+
 import { globalFunctions } from '../utils/globalFunctions.js';
 import { Tags } from '../Tags/tag.js';
-import { ButtonMenuFactory } from '../factory/ButtonFactory.js'
-import { makeIngredient, AllIds} from '../utils/arrays.js'
+import { variables } from '../utils/variables.js';
 
-globalFunctions.display(recipes)
+import { recettes } from '../index.js'
+import { ingredientsArray, AllIds } from '../utils/data.js'
 
-let ingredientsArray = []
 
-//let ingredientsArrayCopy = ingredientsArray;
+
+ 
+let ingredientsArrayCopy = ingredientsArray
+console.log(ingredientsArrayCopy);
+
 let allRecipeIdArray = []//tableau des ID des 50 recettes
 let tagArray = []//tableau qui stoque les array des ID différents tags (ID des 50 recettes compris)
 let intersection; // tableau qui stoque l'intersection des ID du tagArray
@@ -22,44 +21,38 @@ let newArray = []// tableau des ID des objets d'ingredientsArray filtrés avec p
 let uniqueArr; // tableau des ID des objets d'ingredientsArray filtrés sans doublons
 let recipesArray = [] //nouveau tableau d'objet (avec la structure de recipes) filtré à partir des ID du tableau uniqueArr
 
-tagArray.push(AllIds)
-
-ingredientsArray = makeIngredient(recipes)
-
-let liste = Array.from(
-    document.querySelectorAll(
-      ".dropdown-menu__ingredients .dropdown-menu__item"
-    ))
-console.log(liste);
-
-export function filterIngredients(){
+//tagArray.push(AllIds)
+console.log(tagArray);
     
+export function filterIngredients(){
+    let liste = Array.from(
+        document.querySelectorAll(
+          ".dropdown-menu__ingredients .dropdown-menu__item"
+        )
+      );
+    
+    //console.log(liste);
         liste.forEach(elt => {
-   
             elt.addEventListener('click', (e) => {
+                console.log(e.target);
                 let filterValue = e.target.innerHTML
-                
+                console.log(filterValue);
                 listeA(filterValue)
-                liste = Array.from(
-                    document.querySelectorAll(
-                      ".dropdown-menu__ingredients .dropdown-menu__item"
-                    ))
-                console.log(liste);
                 filterIngredients()
                 
+       
                 
-            })
-            
-                
+            })   
+           
         })
-        
+         closeTag()
     }
 
 function listeA(filterValue){
         //filtrage du tableau ingredientsArray en fonction du lien cliqué et récupération des ID
+        //console.log(ingredientsArrayCopy);
+        ingredientsArrayFiltered = ingredientsArrayCopy.filter(elt => elt.name.toLowerCase().includes(filterValue.toLowerCase()))
         
-        ingredientsArrayFiltered = ingredientsArray.filter(elt => elt.name.toLowerCase().includes(filterValue.toLowerCase()))
-        console.log(ingredientsArray);
         console.log(ingredientsArrayFiltered);
         newArray = []
         for(let el of ingredientsArrayFiltered){
@@ -69,18 +62,20 @@ function listeA(filterValue){
         uniqueArr = [...new Set(newArray)]
         
         }
-        tagArray = []
+        //tagArray = []
         tagArray.push(uniqueArr)
-        //tagArray.flat()
+        
         console.log(tagArray);
         intersection = []
+        console.log(intersection);
         intersection = globalFunctions.intersection(intersection, tagArray);
         console.log(intersection);
         recipesArray = []
         recipesArray = globalFunctions.newIntersectionObj(intersection, recipesArray)
         console.log(recipesArray);
 
-        ingredientsArray = makeIngredient(recipesArray)
+
+       //globalFunctions.display(recipesArray)
         globalFunctions.buttonReset()
         globalFunctions.buttonListPreview(recipesArray)
         
@@ -88,12 +83,7 @@ function listeA(filterValue){
         const tag = new Tags(filterValue, 'ingredients')
         tag.buildTag()
         
-     
-        closeTag()
-        
        
-        console.log(ingredientsArray);
-
        
  }
     
@@ -101,23 +91,90 @@ function listeA(filterValue){
 
 
 function closeTag(){
-    const filterListIngredients = document.querySelector('.filter-list__item-ingredients')
-        console.log(filterListIngredients);
-        tagArray = tagArray.flat()
-        console.log(tagArray);
-        tagArray = [...new Set(tagArray)]
-        console.log(tagArray);
-        recipesArray = []
-        recipesArray = globalFunctions.newIntersectionObj(tagArray, recipesArray)
-        console.log(recipesArray);
+    
+    let filterListIngredients = Array.from(document.querySelectorAll('.filter-list__item-ingredients'))
+            console.log(filterListIngredients);
+       
+        for(let i = 0; i < filterListIngredients.length; i++){
+            
+                filterListIngredients[i].addEventListener('click', (e) => {
+                    e.target.remove()
+                   
+                    console.log(tagArray);
+                  
+                    if(filterListIngredients.length > 2) {
+                        
+                        tagArray = tagArray.filter(elt => elt !== tagArray[i])
+                        console.log(tagArray);
+                        recipesArray = []
+                        intersection = []
+                        //tagArray[i] = AllIds
+                        intersection = globalFunctions.intersection(intersection, tagArray);
+                        console.log(intersection);
+                       
+                        recipesArray = globalFunctions.newIntersectionObj(intersection, recipesArray)
+                        console.log(recipesArray);
+                        
+                        globalFunctions.display(recipesArray)
+                        
+                        filterIngredients()
+                    }   
+                    
+                    if(filterListIngredients.length === 2){
+                       
+                        if(filterListIngredients[i] === filterListIngredients[0]){
+                            tagArray = tagArray[1]
+                            recipesArray = []
+                            console.log(tagArray); 
+                            recipesArray = globalFunctions.newIntersectionObj(tagArray, recipesArray)
+                        console.log(recipesArray);
+                        globalFunctions.display(recipesArray)
+                        filterIngredients()
+                        }else if(filterListIngredients[i] === filterListIngredients[1]){
+                            
+                            tagArray = tagArray[0]
+                            recipesArray = []
+                            console.log(tagArray); 
+                            recipesArray = globalFunctions.newIntersectionObj(tagArray, recipesArray)
+                        console.log(recipesArray);
+                        globalFunctions.display(recipesArray)
+                        
+                        filterIngredients()
+                        }
+   
+                    }
+                    if(filterListIngredients.length === 1){
+                        
+                        tagArray = AllIds
+                            recipesArray = []
+                            console.log(tagArray); 
+                            recipesArray = globalFunctions.newIntersectionObj(tagArray, recipesArray)
+                        console.log(recipesArray);
+                        globalFunctions.display(recipesArray)
+                        
+                        tagArray = []
+                        filterIngredients()
+                    }
+                    
+                    if(filterListIngredients === undefined){
+                        globalFunctions.display(recettes)
+                        filterIngredients()
+                    }
+                    
 
-        filterListIngredients.addEventListener('click', (e) => {
-            globalFunctions.display(recipesArray)
-            filterListIngredients.style.display = 'none'
-        })
-
-      
+                })          
+                
+                
+     
+    
+        }
+        
 }
 
-filterIngredients() 
+        
+        
+    
+
+
+//filterIngredients() 
 

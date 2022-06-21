@@ -13,12 +13,15 @@ export const globalFunctions = {
     
   },
 
+ 
+
   intersection(intersectionArray, array){
     intersectionArray = array.reduce((a, b) => a.filter(c => b.includes(c)))
     return intersectionArray
   },
 
   newIntersectionObj(intersectionArray, array1){
+    
     for(let el of intersectionArray){
       let newRecipeArray = recipes.filter(elt => elt.id === el)
       array1.push(newRecipeArray)
