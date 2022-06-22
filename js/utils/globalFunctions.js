@@ -2,6 +2,8 @@ import { Recipe } from "../factory/Recipe.js";
 import { ButtonMenuFactory } from "../factory/ButtonFactory.js";
 import { variables } from "./variables.js";
 import { recipes } from "../data/recipes.js";
+import { recettes } from '../index.js'
+
 
 export const globalFunctions = {
   recipesPreview(array) {
@@ -14,16 +16,28 @@ export const globalFunctions = {
   },
 
  
+    intersect(arrayOfArrays)
+{        
+    var arrayCopy = arrayOfArrays.slice(),
+        baseArray = arrayCopy.pop();
 
-  intersection(intersectionArray, array){
-    intersectionArray = array.reduce((a, b) => a.filter(c => b.includes(c)))
-    return intersectionArray
-  },
+    return baseArray.filter(function(item) {
+        return arrayCopy.every(function(itemList) {
+            return itemList.indexOf(item) !== -1;
+        });
+    });
+}
+,
+
+  // intersection(intersectionArray, array){
+  //   intersectionArray = array.reduce((a, b) => a.filter(c => b.includes(c)))
+  //   return intersectionArray
+  // },
 
   newIntersectionObj(intersectionArray, array1){
     
     for(let el of intersectionArray){
-      let newRecipeArray = recipes.filter(elt => elt.id === el)
+      let newRecipeArray = recettes.filter(elt => elt.id === el)
       array1.push(newRecipeArray)
     }
    return array1 = array1.flat()

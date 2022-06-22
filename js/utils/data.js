@@ -12,8 +12,8 @@ import { variables } from "./variables.js";
 let recettes = variables.recettes
 export let AllIds = [];
 export let ingredientsArray = [];
-let appareils = [];
-let ustensiles = [];
+export let appareils = [];
+export let ustensiles = [];
 let recipeTextArray = []
 
 
