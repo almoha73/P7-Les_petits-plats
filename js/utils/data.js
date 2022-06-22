@@ -14,7 +14,7 @@ export let AllIds = [];
 export let ingredientsArray = [];
 export let appareils = [];
 export let ustensiles = [];
-let recipeTextArray = []
+export let recipeTextArray = []
 
 
 export function loadData() {

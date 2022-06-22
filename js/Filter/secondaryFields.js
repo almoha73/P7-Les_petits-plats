@@ -30,7 +30,7 @@ let recipesArray = []; //nouveau tableau d'objet (avec la structure de recipes) 
 
 
 
-export function filterIngredients() {
+export function filter() {
   let liste;
   
 
@@ -46,7 +46,7 @@ export function filterIngredients() {
         let filterValue = e.target.innerHTML;
         console.log(filterValue, ingredientsArrayCopy, "ingredients");
         listeA(filterValue, ingredientsArrayCopy, "ingredients");
-        filterIngredients()
+        filter()
         
       });
     });
@@ -64,7 +64,7 @@ export function filterIngredients() {
         let filterValue = e.target.innerHTML;
 
         listeA(filterValue, appareilsArrayCopy, "appliances");
-        filterIngredients()
+        filter()
        
       });
     });
@@ -82,7 +82,7 @@ export function filterIngredients() {
         let filterValue = e.target.innerHTML;
 
         listeA(filterValue, ustensilesArrayCopy, "ustensils");
-        filterIngredients()
+        filter()
        
       });
       
@@ -131,13 +131,13 @@ function listeA(filterValue, arrayCopy, type) {
 }
 
 function closeTag() {
-  let filterList = Array.from(document.querySelectorAll(`.filter-list__item`));
-  console.log(filterList);
-  let filter = document.querySelector('.filters-list')
+  let filterListItem = Array.from(document.querySelectorAll(`.filter-list__item`));
+  console.log(filterListItem);
+  let filterList = document.querySelector('.filters-list')
    
-  filterList.forEach(elt => {
+  filterListItem.forEach(elt => {
     elt.addEventListener("click", () => {
-       let index = filterList.indexOf(elt)
+       let index = filterListItem.indexOf(elt)
        console.log(index);
         elt.style.visibility = 'hidden'
         tagArray[index] = AllIds
@@ -148,9 +148,6 @@ function closeTag() {
       //tagArray[i] = AllIds
       intersection = globalFunctions.intersect(tagArray);
       console.log(intersection);
-      
-      
-
      
       // comparaison de tableaux
       const getResult = function (a1, a2) {
@@ -165,14 +162,14 @@ function closeTag() {
       console.log(tagArray);
       if(getResult(intersection, AllIds) === true){
         globalFunctions.display(recettes)
-        filter.innerHTML = ''
+        filterList.innerHTML = ''
         tagArray = []
-        filterIngredients()
+        filter()
       }else{
         recipesArray = globalFunctions.newIntersectionObj(intersection, recipesArray)
         console.log(recipesArray);
         globalFunctions.display(recipesArray)
-        filterIngredients()
+        filter()
       }
 
      

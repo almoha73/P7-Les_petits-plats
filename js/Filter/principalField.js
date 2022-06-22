@@ -1,10 +1,17 @@
 import { loadData } from "../utils/data.js";
 import { variables } from "../utils/variables.js";
-import { recipes } from "../data/recipes.js";
-import { globalFunctions } from "../utils/globalFunctions.js";
-import { filterIngredients} from '../Filter/secondaryFields.js'
 
-let ingredientsArray, appareils, ustensiles, AllIds, recipeTextArray, recettes
+import { recettes } from "../index.js";
+import { globalFunctions } from "../utils/globalFunctions.js";
+import { filter} from '../Filter/secondaryFields.js'
+
+import {
+  ingredientsArray,
+  AllIds,
+  appareils,
+  ustensiles,
+  recipeTextArray
+} from "../utils/data.js";
 
 
 
@@ -19,7 +26,7 @@ export function filterPrincipalField(){
        let recipesArray = []
        let tagArray = []
        let filterElementId = []
-       let intersection;
+      
           for(let el of array1){
             let newRecipeArray = recettes.filter(elt => elt.id === el.id)
           console.log(newRecipeArray);
@@ -36,7 +43,7 @@ export function filterPrincipalField(){
          
           globalFunctions.display(recipesArray)
           
-          //filterIngredients()
+          filter()
   
     }else{
       globalFunctions.display(recettes)
