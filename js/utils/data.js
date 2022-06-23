@@ -3,9 +3,9 @@ import { Ingredients } from "../factory/Ingredients.js";
 
 import { Appareil } from "../factory/Appareil.js";
 import { Ustensils } from "../factory/Ustensils.js";
-import { Recipe } from "../factory/Recipe.js";
+//import { Recipe } from "../factory/Recipe.js";
 import { TextCard } from "../factory/text.js";
-import { globalFunctions } from "./globalFunctions.js";
+//import { globalFunctions } from "./globalFunctions.js";
 import { variables } from "./variables.js";
 
 

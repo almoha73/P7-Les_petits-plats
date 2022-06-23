@@ -1,4 +1,4 @@
-import {} from "../index.js";
+//import {} from "../index.js";
 import { recipes } from "../data/recipes.js";
 export let  variables = {
   recettes: recipes,

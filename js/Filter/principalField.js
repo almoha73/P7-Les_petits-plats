@@ -1,43 +1,20 @@
-import { loadData } from "../utils/data.js";
-import { variables } from "../utils/variables.js";
-
-import { recettes } from "../index.js";
-import { globalFunctions } from "../utils/globalFunctions.js";
-import { filter} from './secondaryFields.js'
-
+//import { loadData } from "../utils/data.js";
 import {
-  ingredientsArray,
-  AllIds,
-  appareils,
-  ustensiles,
   recipeTextArray
 } from "../utils/data.js";
+//import { filter} from './secondaryFields.js'
+import { recettes } from "../index.js";
+import { variables } from "../utils/variables.js";
+import { globalFunctions } from "../utils/globalFunctions.js";
 
 
 
 
 
 
-export const  filterPrincipalField = () => {
-  
-  variables.formControl.addEventListener('keyup', (e) => {
-    let filterValue = e.target.value.trim().toLowerCase()
-    if(filterValue.length > 2){
-      let array = makeTagArray(filterValue)
-      globalFunctions.display(array.recipesArray)
-    console.log(array);
-    filter()
-    return array.tagArray
-  }
- 
-})
-}
 
 
-
-
-
-export function makeTagArray(filterValue){
+ export function makeTagArray(filterValue){
   
         const array1 = recipeTextArray.filter(elt => elt.text.includes(filterValue))
         console.log(array1);

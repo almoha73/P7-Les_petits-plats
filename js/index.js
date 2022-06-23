@@ -1,5 +1,5 @@
 
-import { filterPrincipalField } from "./Filter/principalField.js";
+import { filterPrincipalField } from "./Filter/secondaryFields.js";
 import { filter } from "./Filter/secondaryFields.js";
 import { globalFunctions } from "./utils/globalFunctions.js";
 import {} from "./dropdown/dropdown.js";

@@ -1,8 +1,4 @@
-import { globalFunctions } from "../utils/globalFunctions.js";
-import { Tags } from "../Tags/tag.js";
-import { variables } from "../utils/variables.js";
-//import { filterPrincipalField, makeTagArray} from "./principalField.js"
-
+//import { arr } from "./principalField.js";
 import { recettes } from "../index.js";
 import {
   ingredientsArray,
@@ -10,9 +6,38 @@ import {
   appareils,
   ustensiles,
 } from "../utils/data.js";
+import { makeTagArray} from "./principalField.js"
+import { globalFunctions } from "../utils/globalFunctions.js";
+import { Tags } from "../Tags/tag.js";
+import { variables } from "../utils/variables.js";
+//import { tagArray} from './principalField.js'
 
 
+let tagArray;
 
+export const  filterPrincipalField = () => {
+  let filterList = document.querySelector('.filters-list')
+  variables.formControl.addEventListener('keyup', (e) => {
+    let filterValue = e.target.value.trim().toLowerCase()
+    if(filterValue.length > 2){
+      let array = makeTagArray(filterValue)
+      globalFunctions.display(array.recipesArray)
+    console.log(array);
+ 
+    tagArray= array.tagArray
+    
+    filter()
+    
+  }else{
+    globalFunctions.display(recettes)
+    tagArray = []
+    filterList.innerHTML = ''
+    filter()
+    
+  }
+})
+
+}
 
 
 let ingredientsArrayCopy = ingredientsArray;
@@ -21,7 +46,7 @@ let ustensilesArrayCopy = ustensiles;
 console.log(ingredientsArrayCopy, appareils, ustensiles);
 
 let allRecipeIdArray = []; //tableau des ID des 50 recettes
-let tagArray = []; //tableau qui stoque les array des ID différents tags (ID des 50 recettes compris)
+ //tableau qui stoque les array des ID différents tags (ID des 50 recettes compris)
 let intersection; // tableau qui stoque l'intersection des ID du tagArray
 let removeDuplicate;
 let arrayFiltered; // tableau qui stoque les objets d'ingredientsArray filtrés en fonction du lien cliqué
@@ -30,22 +55,6 @@ let uniqueArr; // tableau des ID des objets d'ingredientsArray filtrés sans dou
 let recipesArray = []; //nouveau tableau d'objet (avec la structure de recipes) filtré à partir des ID du tableau uniqueArr
 
 //tagArray.push(AllIds)
-
-export const  filterPrincipalField = () => {
-  
-  variables.formControl.addEventListener('keyup', (e) => {
-    let filterValue = e.target.value.trim().toLowerCase()
-    if(filterValue.length > 2){
-      let array = makeTagArray(filterValue)
-    console.log(array);
-    return {array} 
-  }
- 
-})
-}
-
-
-
 
 
 export function filter() {
@@ -157,12 +166,27 @@ function closeTag() {
    
   filterListItem.forEach(elt => {
     elt.addEventListener("click", () => {
-       let index = filterListItem.indexOf(elt)
-       console.log(index);
-        elt.style.visibility = 'hidden'
-        tagArray[index] = AllIds
-      console.log(tagArray);
 
+      if(filterListItem.length === tagArray.length){
+        let index = filterListItem.indexOf(elt)
+        console.log(index);
+         elt.style.visibility = 'hidden'
+         tagArray[index] = AllIds
+       console.log(tagArray);
+      }
+       
+      if(filterListItem.length < tagArray.length){
+        let index = filterListItem.indexOf(elt) + 1
+        console.log(index);
+        console.log(tagArray);
+         elt.style.visibility = 'hidden'
+        tagArray[index] = tagArray[0]
+        console.log(tagArray);
+      }
+
+      // if(filterListItem.length > tagArray){
+      //   filterList.innerHTML = ''
+      // }
       recipesArray = []
       intersection = []
       //tagArray[i] = AllIds
@@ -192,8 +216,10 @@ function closeTag() {
         filter()
       }
 
-     
+      
       })
+
+      
   }) 
     
     

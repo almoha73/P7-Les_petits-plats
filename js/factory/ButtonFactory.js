@@ -1,5 +1,5 @@
-import {} from "../index.js";
-import { recipes } from "../data/recipes.js";
+//import {} from "../index.js";
+//import { recipes } from "../data/recipes.js";
 import { variables } from "../utils/variables.js";
 
 export class ButtonMenuFactory {
