@@ -12,5 +12,5 @@ console.log(recettes);
 loadData()
 globalFunctions.display(recettes)
 filterPrincipalField();
-filter()
 
+filter()

@@ -1,6 +1,7 @@
 import { globalFunctions } from "../utils/globalFunctions.js";
 import { Tags } from "../Tags/tag.js";
 import { variables } from "../utils/variables.js";
+//import { filterPrincipalField, makeTagArray} from "./principalField.js"
 
 import { recettes } from "../index.js";
 import {
@@ -9,6 +10,9 @@ import {
   appareils,
   ustensiles,
 } from "../utils/data.js";
+
+
+
 
 
 let ingredientsArrayCopy = ingredientsArray;
@@ -26,6 +30,20 @@ let uniqueArr; // tableau des ID des objets d'ingredientsArray filtrés sans dou
 let recipesArray = []; //nouveau tableau d'objet (avec la structure de recipes) filtré à partir des ID du tableau uniqueArr
 
 //tagArray.push(AllIds)
+
+export const  filterPrincipalField = () => {
+  
+  variables.formControl.addEventListener('keyup', (e) => {
+    let filterValue = e.target.value.trim().toLowerCase()
+    if(filterValue.length > 2){
+      let array = makeTagArray(filterValue)
+    console.log(array);
+    return {array} 
+  }
+ 
+})
+}
+
 
 
 
@@ -108,8 +126,10 @@ function listeA(filterValue, arrayCopy, type) {
     newArray = newArray.flat();
     uniqueArr = [...new Set(newArray)];
   }
+ console.log(tagArray);
+    tagArray.push(uniqueArr);
  
-  tagArray.push(uniqueArr);
+  
 
   console.log(tagArray);
   intersection = [];
