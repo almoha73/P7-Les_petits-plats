@@ -4,8 +4,8 @@ import {
 } from "../utils/data.js";
 //import { filter} from './secondaryFields.js'
 import { recettes } from "../index.js";
-import { variables } from "../utils/variables.js";
-import { globalFunctions } from "../utils/globalFunctions.js";
+//import { variables } from "../utils/variables.js";
+//import { globalFunctions } from "../utils/globalFunctions.js";
 
 
 
@@ -18,6 +18,11 @@ import { globalFunctions } from "../utils/globalFunctions.js";
   
         const array1 = recipeTextArray.filter(elt => elt.text.includes(filterValue))
         console.log(array1);
+
+        if(array1 ){
+          const erreur = document.querySelector('h1.erreur')
+          erreur.style.display = 'block'
+        }
         
        let recipesArray = []
        let tagArray = []

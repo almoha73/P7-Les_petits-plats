@@ -1,6 +1,14 @@
 @use '../abstracts';
 
 /* FILTERS LIST */
+
+h1.erreur{
+  display: none;
+  text-align: center;
+  margin-bottom: 10px;
+  color: abstracts.$color-ustensil
+}
+
 .filters-list {
     display: flex;
     align-items: flex-start;

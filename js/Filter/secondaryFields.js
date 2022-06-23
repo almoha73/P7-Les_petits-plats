@@ -10,7 +10,7 @@ import { makeTagArray} from "./principalField.js"
 import { globalFunctions } from "../utils/globalFunctions.js";
 import { Tags } from "../Tags/tag.js";
 import { variables } from "../utils/variables.js";
-//import { tagArray} from './principalField.js'
+
 
 
 let tagArray;
@@ -23,15 +23,20 @@ export const  filterPrincipalField = () => {
       let array = makeTagArray(filterValue)
       globalFunctions.display(array.recipesArray)
     console.log(array);
- 
+      
     tagArray= array.tagArray
     
     filter()
     
-  }else{
+  }
+  
+  
+  else{
+    const erreur = document.querySelector('h1.erreur')
     globalFunctions.display(recettes)
     tagArray = []
     filterList.innerHTML = ''
+    erreur.style.display = 'none'
     filter()
     
   }
@@ -184,9 +189,6 @@ function closeTag() {
         console.log(tagArray);
       }
 
-      // if(filterListItem.length > tagArray){
-      //   filterList.innerHTML = ''
-      // }
       recipesArray = []
       intersection = []
       //tagArray[i] = AllIds
